@@ -1,0 +1,33 @@
+Admin Ansicht:
+- Auto erstellen
+	- input validation
+		- alle felder mandatory
+		- datentyp validation
+- Auto löschen
+- Auto updaten
+	- input validation
+		- alle felder mandatory
+		- datentyp validation
+- Einzelned Auto anzeigen
+- Alle Autos anzeigen
+
+Client Ansicht:
+- Filter
+	- start / end Datum -> required
+	- Suche nach name (partial match)
+	- Typ
+	- Gear shift
+	- Preis pro Tag (min - max)
+	- min Sitzplätze
+- input validation
+	- start < end Datum
+	- start datum nicht in der vergangenheit
+	- max 1 Monat Mietzeit
+	- min < max
+- Anzeige der Suchresultate
+	- Mit Bild und Daten vom Auto 
+	- sortierung: preis aufsteigend / absteigend
+- Knopf zum Mieten
+	- Confirmation nach erfolgreichem Abschluss
+
+
