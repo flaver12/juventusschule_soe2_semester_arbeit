@@ -4,4 +4,5 @@ export interface Car {
     pricePerDay: number;
     seats: number;
     type: string;
+    gearShift: string;
 }

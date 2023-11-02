@@ -1,8 +1,8 @@
-import './App.scss';
 
 import { Component, createSignal, onMount } from 'solid-js';
 import Counter from './Counter';
 import { CarService } from './service/CarService';
+import { Button } from '@suid/material';
 
 const App: Component = () => {
   const [counter, setCounter] = createSignal(0);
@@ -20,6 +20,7 @@ const App: Component = () => {
   return (
     <>
       <div>
+        <Button variant="contained">Hello world</Button>
         <h1 class="header">{counter()}</h1>
       </div>
       <Counter />
