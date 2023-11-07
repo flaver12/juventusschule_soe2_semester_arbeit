@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController
 class CarController(private val carService: CarService) {
 
     @GetMapping
-    fun index(): List<CarModel> {
+    fun index(
+        @RequestParam(name = "start_date", required = false) startDate: String?,
+        @RequestParam(name = "end_date", required = false) endDate: String?
+    ): List<CarModel> {
         return carService.findAll()
     }
 

@@ -7,8 +7,4 @@ export class CarService extends BaseService<Car> {
         super("car");
     }
 
-    public async loadAllCars(): Promise<Car[]> {
-        return await this.loadAll();
-    }
-
 }

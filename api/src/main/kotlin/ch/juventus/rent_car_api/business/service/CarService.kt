@@ -1,12 +1,14 @@
 package ch.juventus.rent_car_api.business.service
 
+import ch.juventus.rent_car_api.business.CarFilter
 import ch.juventus.rent_car_api.business.model.CarModel
 import ch.juventus.rent_car_api.data.entity.Car
 import ch.juventus.rent_car_api.data.repository.CarRepository
+import org.springframework.data.domain.Example
 import kotlin.collections.ArrayList
 
 @org.springframework.stereotype.Service
-class CarService(private val carRepository: CarRepository) : Service<CarModel, Car> {
+class CarService(private val carRepository: CarRepository) : Service<CarModel, Car, CarFilter> {
     override fun findAll(): List<CarModel> {
         val entityList = carRepository.findAll()
         val convertedResult = ArrayList<CarModel>()
@@ -16,6 +18,10 @@ class CarService(private val carRepository: CarRepository) : Service<CarModel, C
         }
 
         return convertedResult;
+    }
+
+    override fun findByFilter(filter: CarFilter): Car {
+        val entityList = carRepository.findCarBy
     }
 
     override fun find(id: Long): CarModel? {
