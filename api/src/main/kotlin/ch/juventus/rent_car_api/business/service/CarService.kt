@@ -1,5 +1,8 @@
 package ch.juventus.rent_car_api.business.service
 
+import ch.juventus.rent_car_api.business.filter.CarFilter
+import ch.juventus.rent_car_api.business.filter.Filter
+import ch.juventus.rent_car_api.business.model.CarFilterModel
 import ch.juventus.rent_car_api.business.model.CarModel
 import ch.juventus.rent_car_api.data.entity.Car
 import ch.juventus.rent_car_api.data.repository.CarRepository
@@ -7,9 +10,19 @@ import org.springframework.stereotype.Service
 
 @Service
 class CarService(private val carRepository: CarRepository) : IService<CarModel, Car> {
+
     override fun loadAll(): List<CarModel> {
         val result = carRepository.findAll()
 
+        val convertedResult = ArrayList<CarModel>()
+        result.forEach{ car -> convertedResult.add(convertFromEntityModel(car)) }
+
+        return convertedResult
+    }
+
+    override fun loadByFilter(filter: Filter<Car>): List<CarModel> {
+        filter.parse()
+        val result = carRepository.findByFilter(filter)
         val convertedResult = ArrayList<CarModel>()
         result.forEach{ car -> convertedResult.add(convertFromEntityModel(car)) }
 
