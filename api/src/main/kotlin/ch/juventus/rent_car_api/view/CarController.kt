@@ -1,19 +1,9 @@
-package ch.juventus.rent_car_api.view.controller
+package ch.juventus.rent_car_api.view
 
-import ch.juventus.rent_car_api.business.CarFilter
 import ch.juventus.rent_car_api.business.model.CarModel
 import ch.juventus.rent_car_api.business.service.CarService
 import org.springframework.util.MultiValueMap
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
-import java.security.InvalidParameterException
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/car")
@@ -21,6 +11,7 @@ class CarController(private val carService: CarService) {
 
     @GetMapping
     fun index(@RequestParam filters: MultiValueMap<String, String>?): List<CarModel> {
+        /*
         if (filters != null) {
             println("Filters:")
             filters["filter"]?.forEach { println(it) }
@@ -44,13 +35,14 @@ class CarController(private val carService: CarService) {
                 endDate = endDate
             )
         }
+         */
 
-        return carService.findAll()
+        return carService.loadAll()
     }
 
     @GetMapping("/{id}")
     fun find(@PathVariable("id") id: Long): CarModel? {
-        return carService.find(id)
+        return carService.load(id)
     }
 
     @PostMapping

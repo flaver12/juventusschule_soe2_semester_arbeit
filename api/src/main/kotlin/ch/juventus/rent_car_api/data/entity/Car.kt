@@ -1,27 +1,24 @@
 package ch.juventus.rent_car_api.data.entity
 
-import jakarta.persistence.*
+import com.fasterxml.jackson.annotation.JsonProperty
+import java.util.Date
 
-@Entity
-@Table(name = "car")
-data class Car (
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    val id: Long,
-
-    @Column(name = "name")
+data class Car(
+    var id: Long?,
     val name: String,
-
-    @Column(name = "type")
     val type: String,
-
-    @Column(name = "gear_shift")
     val gearShift: String,
-
-    @Column(name = "price_per_day")
     val pricePerDay: Double,
+    val seats: Int,
+    val startDate: Date?,
+    val endDate: Date?
+) : Entity {
+    override fun getId(): Long {
+        // Cast is okay here for this little app
+        return id as Long
+    }
 
-    @Column(name = "seats")
-    val seats: Int
-)
+    override fun setId(id: Long) {
+        this.id = id
+    }
+}

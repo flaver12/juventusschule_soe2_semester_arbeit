@@ -1,11 +1,28 @@
 package ch.juventus.rent_car_api.data.repository
 
+import ch.juventus.rent_car_api.data.database.InMemoryDatabase
 import ch.juventus.rent_car_api.data.entity.Car
-import org.springframework.data.jpa.domain.Specification
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor
-import org.springframework.data.jpa.repository.Query
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Service
 
-@Repository
-interface CarRepository : JpaRepository<Car, Long>, JpaSpecificationExecutor<Car>
+@Service
+class CarRepository(private val database: InMemoryDatabase<Car>) : Repository<Car> {
+    override fun create(data: Car): Car {
+        return database.create(data)
+    }
+
+    override fun update(data: Car): Car {
+        return database.update(data)
+    }
+
+    override fun delete(id: Long) {
+        database.delete(id)
+    }
+
+    override fun find(id: Long): Car? {
+        return database.find(id)
+    }
+
+    override fun findAll(): List<Car> {
+        return database.findAll()
+    }
+}
