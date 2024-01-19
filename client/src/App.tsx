@@ -1,31 +1,32 @@
+import NavBar from './components/Navbar'
+import CarList from './components/Carlist'
+import FilterForm from './components/Filterform'
+import { createContext, useEffect, useState } from 'react';
+import { Car } from './models/Car';
+import { CarService } from './services/CarService';
 
-import { Component, createSignal, onMount } from 'solid-js';
-import Counter from './Counter';
-import { CarService } from './service/CarService';
-import { Button } from '@suid/material';
+// Create a context to share the cars state
+export const CarContext = createContext<Car[]>([]);
 
-const App: Component = () => {
-  const [counter, setCounter] = createSignal(0);
-  setInterval(setCounter, 1000, (c: number) => c + 1);
+function App() {
+  const [filteredCars, setFilteredCars] = useState<Car[]>([]);
+  const [initialCars, setInitialCars] = useState<boolean>(false);
+  const carService = new CarService();
+  if (initialCars === false) {
+    carService.getCars().then(cars => {
+      setFilteredCars(cars);
+      setInitialCars(true);
+    });
+  }
 
-  onMount(async () => {
-    console.log('App mounted');
-
-    const carService = new CarService();
-    const cars = await carService.loadAll();
-
-    console.log(cars);
-  });
-
+  
   return (
-    <>
-      <div>
-        <Button variant="contained">Hello world</Button>
-        <h1 class="header">{counter()}</h1>
-      </div>
-      <Counter />
-    </>
-  );
-};
+    <CarContext.Provider value={filteredCars}>
+      <NavBar />
+      <FilterForm onFilter={setFilteredCars} />
+      <CarList />
+    </CarContext.Provider>
+  )
+}
 
-export default App;
+export default App
