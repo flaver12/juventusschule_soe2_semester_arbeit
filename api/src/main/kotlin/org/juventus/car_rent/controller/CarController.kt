@@ -26,14 +26,6 @@ class CarController(private val carService: CarService) {
     @GetMapping
     fun index(): List<Car> = carService.findAll()
 
-    @Operation(summary = "Find a car by id")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "Successful operation"),
-        ApiResponse(responseCode = "404", description = "Car not found")
-    ])
-    @GetMapping("/{id}")
-    fun find(@PathVariable("id") id: Long): Optional<Car> = carService.find(id)
-
     @Operation(summary = "Rent a car")
     @ApiResponses(value = [
         ApiResponse(responseCode = "200", description = "Successful operation"),
@@ -42,6 +34,14 @@ class CarController(private val carService: CarService) {
     ])
     @PostMapping("/{id}/rent")
     fun rent(@PathVariable("id") id: Long, @RequestBody rent: Rent): Car = carService.rent(id, rent)
+
+    @Operation(summary = "Find a car by id")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Successful operation"),
+        ApiResponse(responseCode = "404", description = "Car not found")
+    ])
+    @GetMapping("/{id}")
+    fun find(@PathVariable("id") id: Long): Optional<Car> = carService.find(id)
 
     @Operation(summary = "Create a new car")
     @ApiResponses(value = [

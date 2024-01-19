@@ -11,6 +11,9 @@ export const CarContext = createContext<Car[]>([]);
 function App() {
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
   const [initialCars, setInitialCars] = useState<boolean>(false);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
   const carService = new CarService();
   if (initialCars === false) {
     carService.getCars().then(cars => {
@@ -23,8 +26,8 @@ function App() {
   return (
     <CarContext.Provider value={filteredCars}>
       <NavBar />
-      <FilterForm onFilter={setFilteredCars} />
-      <CarList />
+      <FilterForm onFilter={setFilteredCars} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />
+      <CarList startDate={startDate} endDate={endDate} />
     </CarContext.Provider>
   )
 }

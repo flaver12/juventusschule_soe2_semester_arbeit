@@ -1,5 +1,6 @@
 import { HttpMethod } from "../enums/HttpMethod";
 import { Car } from "../models/Car";
+import { RentCar } from "../models/RentCar";
 
 export class CarService {
     public async getCars(): Promise<Car[]> {
@@ -30,7 +31,16 @@ export class CarService {
         await this.sendRequest(HttpMethod.Delete, `/${id}`);
     }
 
-    private async sendRequest(method: HttpMethod, path: string, rawBody: Car|undefined = undefined): Promise<Car[]> {
+    public async rentCar(id: number, rent: RentCar): Promise<Car> {
+        const result = (await this.sendRequest(
+          HttpMethod.Post,
+          `/${id}/rent`,
+          rent
+        )) as unknown as Car;
+        return this.formatCar(result);
+    }
+
+    private async sendRequest(method: HttpMethod, path: string, rawBody: Car|RentCar|undefined = undefined): Promise<Car[]> {
         let body: string | null = null;
         if (rawBody) {
             body = JSON.stringify(rawBody);

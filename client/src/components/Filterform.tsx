@@ -1,19 +1,20 @@
-import { useContext, useState } from 'react';
-import { TextField, Button, Grid, Container, Select, MenuItem, FormControl } from '@mui/material';
-import { CarContext } from '../App';
+import { useState } from 'react';
+import { TextField, Button, Grid, Container, MenuItem, FormControl } from '@mui/material';
 import { Car } from '../models/Car';
 import { CarService } from '../services/CarService';
 import moment from 'moment';
 import { carFilter } from '../util/carFilter';
 
 interface FilterFormProps {
+    startDate: string;
+    setStartDate: (date: string) => void;
+    endDate: string;
+    setEndDate: (date: string) => void;
     onFilter: (filtered: Car[]) => void;
 }
 
-function FilterForm({ onFilter }: FilterFormProps) {
+function FilterForm({ startDate, setStartDate, endDate, setEndDate, onFilter }: FilterFormProps) {
     const carService = new CarService();
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [gearShift, setGearShift] = useState('');

@@ -10,12 +10,14 @@ import '@fontsource/roboto/700.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AdminPanel from './AdminPanel.tsx';
+import SuccessPage from './Success.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/success" element={<SuccessPage />} />
         <Route path="/admin" element={<AdminPanel />} />
       </Routes>
     </Router>

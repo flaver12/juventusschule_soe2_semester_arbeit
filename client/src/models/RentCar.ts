@@ -1,5 +1,5 @@
 export interface RentCar {
-    id: number;
-    startDate: Date;
-    endDate: Date;
+    id?: number;
+    startDate: string;
+    endDate: string;
 }
