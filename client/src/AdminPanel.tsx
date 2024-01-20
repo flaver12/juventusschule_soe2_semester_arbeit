@@ -69,7 +69,7 @@ const AdminPanel: React.FC = () => {
     return (
         <>
             <Navbar></Navbar>
-            <Box display="flex" justifyContent="center" alignItems="center" height="calc(100vh - 64px)" style={{ marginTop: '-200px', marginLeft: '50px' }}>
+            <Box display="flex" justifyContent="center" alignItems="center" height="calc(100vh - 64px)" style={{ marginTop: '-50px', marginLeft: '50px' }}>
                 <div style={{ display: 'flex', gap: '2rem', width: '100%' }}>
                     <div style={{ flex: 1 }}>
                         <List>
