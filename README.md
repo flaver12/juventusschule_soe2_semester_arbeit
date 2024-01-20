@@ -31,3 +31,16 @@ So kann der Component überall eingefügt werden und läuft out of the box.
 * Models -> Generelle ansammlung von HttpModels und FilterModels
 * Services -> Die einzelnen Services die mit der API kommunzieren
 * Util -> Hilfsfunktionen
+
+## Component overview frontend
+<pre>
+└── src
+    ├── components
+        ├── CarForm
+        ├── Carlist
+        ├── Filterform
+        ├── Navbar
+    ├── AdminPanel
+    ├── App
+    └── Success
+</pre>
